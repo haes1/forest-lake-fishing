@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#102d35">
+  <title>Лесное озеро — рыболовный симулятор</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app">
+    <section class="game-shell">
+      <div id="lake" aria-label="Трёхмерная игровая сцена рыбалки"></div>
+
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">◒</span><div><b>Лесное озеро</b><small>рыболовный симулятор</small></div></div>
+        <div class="wallet"><span>★ <strong id="level">1</strong></span><span>₽ <strong id="money">650</strong></span><span>⚖ <strong id="keep-count">0</strong></span></div>
+      </header>
+
+      <div class="location-card">
+        <span class="eyebrow">Сектор 01 · утро</span>
+        <strong id="spot-name">Старый мостик</strong>
+        <span id="weather">Пасмурно · клёв хороший</span>
+      </div>
+
+      <div id="notice" class="notice" aria-live="polite"></div>
+
+      <div class="trophy-layer" id="trophy-layer" hidden>
+        <div class="trophy-card">
+          <span class="eyebrow">ТРОФЕЙ</span>
+          <strong id="trophy-name">—</strong>
+          <div class="trophy-stats"><span id="trophy-weight">—</span><span id="trophy-price">—</span></div>
+          <p class="trophy-tip">Потяните по экрану, чтобы рассмотреть рыбу со всех сторон.</p>
+          <div class="trophy-actions">
+            <button class="primary-action" id="trophy-keep">🎒 Оставить</button>
+            <button class="secondary-action" id="trophy-release">🌊 Отпустить</button>
+          </div>
+        </div>
+      </div>
+
+      <section class="fishing-hud">
+        <div class="status-panel" id="status-panel">
+          <div class="status-line"><span id="phase-label">ГОТОВ К ЗАБРОСУ</span><span id="phase-value">Поплавочная удочка</span></div>
+          <div class="bite-meter"><i id="bite-fill"></i></div>
+          <p id="hint">Нажмите «Забросить», чтобы отправить снасть в воду.</p>
+        </div>
+        <div class="fight-panel" id="fight-panel" hidden>
+          <div class="status-line"><span>НАТЯЖЕНИЕ ЛЕСКИ</span><b id="tension-value">28%</b></div>
+          <div class="tension-meter"><i id="tension-fill"></i><span id="tension-limit"></span></div>
+          <div class="status-line stamina-line"><span>УСТАЛОСТЬ РЫБЫ</span><b id="stamina-value">0%</b></div>
+          <div class="stamina-meter"><i id="stamina-fill"></i></div>
+          <div class="fish-info"><span id="fish-name">—</span><span id="fish-weight">—</span></div>
+          <div class="fight-hint" id="fight-hint">Тяните, пока рыба не устанет. На рывке отпускайте катушку.</div>
+          <div class="rush-flag" id="rush-flag" hidden>⚠ РЫВОК — ОТПУСТИТЕ КАТУШКУ</div>
+        </div>
+      </section>
+
+      <div class="action-row" id="action-row">
+        <button class="primary-action" id="cast-button">🎣 Забросить</button>
+        <button class="secondary-action" id="reel-button" hidden>Катить леску (удерживать)</button>
+      </div>
+
+      <nav class="bottom-nav" aria-label="Разделы игры">
+        <button class="nav-button active" data-panel="water"><span>🌊</span>Рыбалка</button>
+        <button class="nav-button" data-panel="spots"><span>🗺️</span>Места</button>
+        <button class="nav-button" data-panel="tackle"><span>🧰</span>Снасти</button>
+        <button class="nav-button" data-panel="album"><span>📖</span>Альбом</button>
+        <button class="nav-button" data-panel="bag"><span>🎒</span>Садок</button>
+      </nav>
+    </section>
+
+    <div class="modal-backdrop" id="modal-backdrop" hidden>
+      <section class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Игровое меню">
+        <button class="close-modal" id="close-modal" aria-label="Закрыть">×</button>
+        <div id="modal-content"></div>
+      </section>
+    </div>
+  </main>
+  <script type="importmap">
+    {
+      "imports": {
+          "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
